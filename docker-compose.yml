@@ -1,0 +1,33 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: xm-stock-app
+    ports:
+      - "8080:80"
+    environment:
+      - APP_ENV=dev
+      - APP_SECRET=your-secret-key-change-in-production
+      - MAILER_DSN=smtp://mailhog:1025
+    volumes:
+      - .:/var/www/html
+      - /var/www/html/vendor
+    depends_on:
+      - mailhog
+    networks:
+      - xm-network
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: xm-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - xm-network
+
+networks:
+  xm-network:
+    driver: bridge
+
