@@ -1,0 +1,13 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: XM Stock Quotes API
+            description: API for retrieving historical stock quotes and sending them via email
+            version: 1.0.0
+        servers:
+            - url: http://localhost:8080
+              description: Local development server
+    areas:
+        path_patterns:
+            - ^/api(?!/doc$)
+
